@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Crownmark Studio - Creative Agency</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+:root {
+  --navy: #0D2346;
+  --gold: #D4AF37;
+  --gold-hover: #c49e2f;
+  --gray: #f4f6f8;
+  --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+/* TOP BAR */
+.topbar {
+  background: var(--navy);
+  color: #fff;
+  font-size: 13px;
+  border-bottom: 2px solid var(--gold);
+}
+.topbar i { color: var(--gold); margin-right: 5px; }
+
+/* NAVBAR */
+.navbar {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: var(--transition-smooth);
+}
+.navbar-brand {
+  font-weight: 700;
+  color: var(--navy);
+  transition: var(--transition-smooth);
+}
+.nav-link {
+  color: var(--navy) !important;
+  font-weight: 500;
+  position: relative;
+  transition: var(--transition-smooth);
+}
+.nav-link:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--gold);
+  transition: var(--transition-smooth);
+}
+.nav-link:hover:after,
+.nav-link.active:after {
+  width: 100%;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--gold) !important;
+}
+
+/* HERO CAROUSEL */
+.hero-carousel, .carousel-inner, .carousel-item {
+  height: 100vh;
+}
+.carousel-item img {
+  height: 100vh;
+  object-fit: cover;
+  width: 100%;
+  transform: scale(1.1);
+  transition: transform 6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.carousel-item.active img {
+  transform: scale(1);
+}
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(13,35,70,0.85) 0%, rgba(13,35,70,0.6) 100%);
+  z-index: 1;
+}
+.hero-content-wrapper {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.hero-content {
+  text-align: center;
+  color: #fff;
+  width: 85%;
+  max-width: 900px;
+}
+.hero h1 {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.btn-gold {
+  background: var(--gold);
+  color: #000;
+  font-weight: 600;
+  border: 2px solid var(--gold);
+  transition: var(--transition-smooth);
+}
+.btn-gold:hover {
+  background: var(--gold-hover);
+  border-color: var(--gold-hover);
+  color: #000;
+  transform: translateY(-2px);
+}
+.btn-outline-light:hover {
+  transform: translateY(-2px);
+}
+
+/* SECTION GLOBAL */
+.section {
+  padding: 100px 0;
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 60px;
+  font-weight: 700;
+  color: var(--navy);
+  position: relative;
+  padding-bottom: 15px;
+}
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background-color: var(--gold);
+  border-radius: 2px;
+}
+
+/* ABOUT US SECTION */
+.about-img-swiper {
+  width: 100%;
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+.about-img-swiper .swiper-slide img {
+  width: 100%;
+  height: 450px; 
+  object-fit: cover;
+}
+.about-img-swiper .swiper-button-next,
+.about-img-swiper .swiper-button-prev {
+  color: var(--navy) !important;
+  background: rgba(255,255,255,0.9);
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: var(--transition-smooth);
+}
+.about-img-swiper .swiper-button-next:hover,
+.about-img-swiper .swiper-button-prev:hover {
+  background: var(--gold);
+  color: #000 !important;
+}
+.about-img-swiper .swiper-button-next::after,
+.about-img-swiper .swiper-button-prev::after {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.about-img-swiper .swiper-pagination-bullet-active {
+  background-color: var(--gold) !important;
+  width: 20px;
+  border-radius: 5px;
+}
+
+/* SERVICE CARDS */
+.service-card {
+  border: none;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  will-change: transform, box-shadow;
+  transition: var(--transition-smooth);
+}
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+.service-card i {
+  transition: transform 0.4s ease;
+  display: inline-block;
+}
+.service-card:hover i {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* PRICING */
+.price-card {
+  border: none;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  border-radius: 15px;
+  height: 100%;
+  will-change: transform, box-shadow;
+  transition: var(--transition-smooth);
+}
+.price-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+}
+
+/* PORTFOLIO INFINITE TICKER MARQUEE */
+.portfolio-container {
+  position: relative;
+  padding: 20px 0;
+  overflow: hidden;
+}
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  width: 100%;
+  aspect-ratio: 15 / 10; 
+  background-color: var(--gray);
+}
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.portfolio-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(13, 35, 70, 0.92);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  padding: 20px;
+  text-align: center;
+  z-index: 2;
+}
+.portfolio-item:hover .portfolio-overlay {
+  opacity: 1;
+}
+.portfolio-item:hover img {
+  transform: scale(1.08);
+}
+.portfolioSwiperTop .swiper-wrapper,
+.portfolioSwiperBottom .swiper-wrapper {
+  transition-timing-function: linear !important;
+}
+
+/* TEAM */
+.team-card {
+  text-align: center;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  overflow: hidden;
+  background: #fff;
+  transition: var(--transition-smooth);
+}
+.team-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+.team-img-wrapper {
+  height: 300px;
+  overflow: hidden;
+  position: relative;
+}
+.team-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.team-card:hover img {
+  transform: scale(1.05);
+}
+.team-social i {
+  color: var(--navy);
+  font-size: 1.2rem;
+  transition: var(--transition-smooth);
+}
+.team-social i:hover {
+  color: var(--gold);
+  transform: scale(1.2);
+}
+
+/* CONTACT */
+.contact-box {
+  background: var(--gray);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+.contact-box .form-control {
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 12px 15px;
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+}
+.contact-box .form-control:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+}
+.map-container {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+/* WHATSAPP FLOAT */
+.whatsapp {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: #25D366;
+  color: #fff;
+  font-size: 28px;
+  padding: 15px;
+  border-radius: 50%;
+  z-index: 999;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  will-change: transform;
+  transition: var(--transition-smooth);
+}
+.whatsapp:hover {
+  transform: scale(1.1) rotate(8deg);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+}
+
+/* FOOTER */
+footer {
+  background: var(--navy);
+  color: #fff;
+  padding: 40px 0;
+  border-top: 3px solid var(--gold);
+}
+</style>
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#nav" data-bs-offset="120">
+
+<div class="topbar py-2 d-none d-md-block">
+  <div class="container d-flex justify-content-between">
+    <div>
+      <i class="bi bi-telephone"></i> +260 964 180 518
+      <i class="bi bi-envelope ms-3"></i> info@crownmarkstudio.com
+      <i class="bi bi-geo ms-3"></i> Lusaka, Zambia
+    </div>
+    <div>
+      <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+      <a href="#" class="text-white"><i class="bi bi-instagram ms-2"></i></a>
+      <a href="#" class="text-white"><i class="bi bi-twitter ms-2"></i></a>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar navbar-expand-lg sticky-top" id="mainNavbar">
+  <div class="container">
+    <a class="navbar-brand" href="#home">Crownmark Studio</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+        <li class="nav-item"><a class="nav-link" href="#portfolio">Portfolio</a></li>
+        <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section id="home" style="position: relative; overflow: hidden;">
+  <div id="heroSlider" class="carousel slide carousel-fade hero-carousel" data-bs-ride="carousel" data-bs-interval="5000">
+    <div class="carousel-indicators" style="z-index: 3;">
+      <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#heroSlider" data-bs-slide-to="2"></button>
+    </div>
+
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="images/photo1.jpg" alt="Crownmark Office Scene 1">
+      </div>
+      <div class="carousel-item">
+        <img src="images/photo2.jpg" alt="Crownmark Studio Production 2">
+      </div>
+      <div class="carousel-item">
+        <img src="images/photo3.jpg" alt="Creative Design Execution 3">
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroSlider" data-bs-slide="prev" style="z-index: 3;">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroSlider" data-bs-slide="next" style="z-index: 3;">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+
+  <div class="hero-overlay"></div>
+  
+  <div class="hero-content-wrapper">
+    <div class="hero-content" data-aos="fade-up" data-aos-duration="800">
+      <h1 class="display-4 text-uppercase fw-bold">Affordable, Professional, and High-Quality Services</h1>
+      <p class="lead mt-3">Empowering businesses in Zambia with premium creative digital solutions.</p>
+      <div class="mt-4">
+        <a href="#pricing" class="btn btn-gold btn-lg px-4 py-2 me-2">Get Started</a>
+        <a href="#contact" class="btn btn-outline-light btn-lg px-4 py-2">Contact Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section">
+  <div class="container">
+    <h2 class="section-title">About Us</h2>
+    <div class="row align-items-center">
+      <div class="col-md-6 mb-5 mb-md-0" data-aos="fade-right">
+        <div class="swiper aboutSwiper about-img-swiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="images/about1.jpg" alt="Creative Brainstorming Session"></div>
+            <div class="swiper-slide"><img src="images/about2.jpg" alt="Web Development Team"></div>
+            <div class="swiper-slide"><img src="images/about3.jpg" alt="Studio Setup Photography"></div>
+            <div class="swiper-slide"><img src="images/about4.jpg" alt="Design Presentation Lusaka"></div>
+            <div class="swiper-slide"><img src="images/about5.jpg" alt="Collaborative Office Zambia"></div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+      <div class="col-md-6" data-aos="fade-left">
+        <div class="ps-md-4">
+          <h3 class="fw-bold text-navy">We Are Crownmark Studio</h3>
+          <p class="text-muted mt-3 lead-sm">We are a premier creative agency based in Lusaka, Zambia, dedicated to delivering top-tier digital transformation strategies. From crafting stunning web ecosystems to deploying comprehensive corporate graphic identity kits, we bridge design with performance mechanics seamlessly.</p>
+          <p class="text-muted">Our multi-disciplinary crew blends technical exactness with boundless vision to design unique, high-value assets configured natively around your long-term brand goals.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="section bg-light">
+  <div class="container">
+    <h2 class="section-title">Services</h2>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="50"><div class="card service-card p-4 text-center h-100"><i class="bi bi-code-slash fs-1 text-warning mb-3"></i><h5 class="fw-bold">Web Design</h5><p class="small text-muted mb-0">Responsive, modern layouts structured perfectly to match your brand identity systems.</p></div></div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="card service-card p-4 text-center h-100"><i class="bi bi-brush fs-1 text-warning mb-3"></i><h5 class="fw-bold">Graphic Design</h5><p class="small text-muted mb-0">Stunning print and digital structural assets designed to pull active market attention.</p></div></div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="150"><div class="card service-card p-4 text-center h-100"><i class="bi bi-lightning fs-1 text-warning mb-3"></i><h5 class="fw-bold">Branding</h5><p class="small text-muted mb-0">Cohesive corporate brand voice systems, identity matrix guidelines, and logomarks.</p></div></div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200"><div class="card service-card p-4 text-center h-100"><i class="bi bi-phone fs-1 text-warning mb-3"></i><h5 class="fw-bold">Social Media</h5><p class="small text-muted mb-0">Content planning pipeline architectures built to drive dynamic organic target engagement.</p></div></div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="250"><div class="card service-card p-4 text-center h-100"><i class="bi bi-camera fs-1 text-warning mb-3"></i><h5 class="fw-bold">Photography</h5><p class="small text-muted mb-0">Crisp, high-fidelity studio production photography engineered for products and corporate events.</p></div></div>
+      <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300"><div class="card service-card p-4 text-center h-100"><i class="bi bi-gear fs-1 text-warning mb-3"></i><h5 class="fw-bold">Development</h5><p class="small text-muted mb-0">Robust backend system applications combined with responsive e-commerce infrastructures.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="pricing" class="section">
+  <div class="container">
+    <h2 class="section-title">Our Pricing</h2>
+    <div class="row g-4 justify-content-center">
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="50">
+        <div class="card price-card p-4 d-flex flex-column justify-content-between">
+          <div>
+            <h4 class="text-muted fs-5">Static Website</h4>
+            <h2 class="fw-bold my-3 text-navy">ZMW 2,500</h2>
+            <hr>
+            <ul class="list-unstyled my-4">
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> 3 Core Pages</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Mobile Responsive Engine</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Technical SEO Optimization</li>
+            </ul>
+          </div>
+          <button class="btn btn-gold w-100 mt-auto">Order Now</button>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+        <div class="card price-card p-4 d-flex flex-column justify-content-between border border-warning" style="position: relative;">
+          <span class="badge bg-warning text-dark position-absolute top-0 end-0 m-3 px-3 py-2 text-uppercase fw-bold">Popular</span>
+          <div>
+            <h4 class="text-muted fs-5">Dynamic Website</h4>
+            <h2 class="fw-bold my-3 text-navy">ZMW 7,500</h2>
+            <hr>
+            <ul class="list-unstyled my-4">
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> 5 Comprehensive Pages</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Integrated Custom Dashboard</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Premium Hosting (1 Year Free)</li>
+            </ul>
+          </div>
+          <button class="btn btn-gold w-100 mt-auto">Order Now</button>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="150">
+        <div class="card price-card p-4 d-flex flex-column justify-content-between">
+          <div>
+            <h4 class="text-muted fs-5">E-Commerce</h4>
+            <h2 class="fw-bold my-3 text-navy">ZMW 16,500</h2>
+            <hr>
+            <ul class="list-unstyled my-4">
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Scale Up to 20 Products</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Cart & Payment Gateways</li>
+              <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Full Operational Training</li>
+            </ul>
+          </div>
+          <button class="btn btn-gold w-100 mt-auto">Order Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio" class="section bg-light">
+  <div class="container-fluid portfolio-container" data-aos="fade-up">
+    <h2 class="section-title">Our Portfolio</h2>
+
+    <div class="swiper portfolioSwiperTop mb-4">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio1.jpg" alt="Apparel Design Deployment 1">
+            <div class="portfolio-overlay"><h5>Static Website</h5><p class="small">Web Design & Development</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio2.jpg" alt="Kafue Lodge Identity Showcase">
+            <div class="portfolio-overlay"><h5>Kafue Safari Lodge Rebrand</h5><p class="small">Brand Identity & Graphics</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio3.jpg" alt="Corporate Ecosystem Architecture 3">
+            <div class="portfolio-overlay"><h5>Static Website</h5><p class="small">Web Design & Development</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio4.jpg" alt="Creative Layout Showcase 4">
+            <div class="portfolio-overlay"><h5>Static Website</h5><p class="small">Web Design & Development</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio5.jpg" alt="Creative Layout Showcase 5">
+            <div class="portfolio-overlay"><h5>Static Website</h5><p class="small">Web Design & Development</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio6.jpg" alt="Creative Layout Showcase 6">
+            <div class="portfolio-overlay"><h5>Static Website</h5><p class="small">Web Design & Development</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio7.jpg" alt="Creative Layout Showcase 7">
+            <div class="portfolio-overlay"><h5>Static Website</h5><p class="small">Web Design & Development</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio8.jpg" alt="Bongohive StartUp Corporate Showcase Video">
+            <div class="portfolio-overlay"><h5>Static Website</h5><p class="small">Web Design & Development</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="swiper portfolioSwiperBottom">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio13.jpg" alt="Pasta la Vita Menu Design Architecture">
+            <div class="portfolio-overlay"><h5>Pasta la vita</h5><p class="small">Menu Design and printing</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio14.jpg" alt="Kolbod Metals Corporate Typography Setup">
+            <div class="portfolio-overlay"><h5>Kolbod Metals</h5><p class="small">Business Card Design and printing</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio15.jpg" alt="Fabric Production Structural Graphics Layout">
+            <div class="portfolio-overlay"><h5>Fabric Printing</h5><p class="small">Print Layout Design</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio16.jpg" alt="Wild Environmental Photography Asset">
+            <div class="portfolio-overlay"><h5>Wild</h5><p class="small">Photography</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio17.jpg" alt="Art Exhibition Promotional Production Visual">
+            <div class="portfolio-overlay"><h5>Art Gallery Exhibition Promo</h5><p class="small">Photography</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio18.jpg" alt="Art Exhibition Asset Execution 2">
+            <div class="portfolio-overlay"><h5>Art Gallery Exhibition Promo</h5><p class="small">Photography</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio19.jpg" alt="Art Exhibition Asset Execution 3">
+            <div class="portfolio-overlay"><h5>Art Gallery Exhibition Promo</h5><p class="small">Photography</p></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="portfolio-item">
+            <img src="images/portfolio21.jpg" alt="Premium Canvas Texturing Design Configuration">
+            <div class="portfolio-overlay"><h5>Canvas</h5><p class="small">Design and printing</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="team" class="section">
+  <div class="container">
+    <h2 class="section-title">Meet Our Team</h2>
+    <div class="row g-4">
+      <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-delay="50">
+        <div class="card team-card p-0">
+          <div class="team-img-wrapper">
+            <img src="images/team1.jpg" alt="Bausara Kasongo - Founder">
+          </div>
+          <div class="p-4">
+            <h5 class="mb-1 fw-bold text-navy">Bausara Kasongo</h5>
+            <p class="text-muted small mb-3">Founder & Creative Director</p>
+            <div class="team-social">
+              <a href="#"><i class="bi bi-linkedin me-2"></i></a>
+              <a href="#"><i class="bi bi-twitter"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="card team-card p-0">
+          <div class="team-img-wrapper">
+            <img src="images/team2.jpg" alt="Moses Jere - Lead Web Developer">
+          </div>
+          <div class="p-4">
+            <h5 class="mb-1 fw-bold text-navy">Moses Jere</h5>
+            <p class="text-muted small mb-3">Lead Web Developer</p>
+            <div class="team-social">
+              <a href="#"><i class="bi bi-linkedin me-2"></i></a>
+              <a href="#"><i class="bi bi-github"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-delay="150">
+        <div class="card team-card p-0">
+          <div class="team-img-wrapper">
+            <img src="images/team3.jpg" alt="Hosen Chella - Graphic Designer">
+          </div>
+          <div class="p-4">
+            <h5 class="mb-1 fw-bold text-navy">Hosen Chella</h5>
+            <p class="text-muted small mb-3">Senior Graphic Designer</p>
+            <div class="team-social">
+              <a href="#"><i class="bi bi-instagram me-2"></i></a>
+              <a href="#"><i class="bi bi-behance"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-delay="200">
+        <div class="card team-card p-0">
+          <div class="team-img-wrapper">
+            <img src="images/team4.jpg" alt="Saviour Nkandu - Lead Photographer">
+          </div>
+          <div class="p-4">
+            <h5 class="mb-1 fw-bold text-navy">Saviour Nkandu</h5>
+            <p class="text-muted small mb-3">Lead Photographer</p>
+            <div class="team-social">
+              <a href="#"><i class="bi bi-instagram me-2"></i></a>
+              <a href="#"><i class="bi bi-camera-fill"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section bg-light">
+  <div class="container">
+    <h2 class="section-title">Contact Crownmark Studio</h2>
+    <div class="row g-4">
+      <div class="col-md-6" data-aos="fade-right">
+        <div class="contact-box">
+          <form id="contactForm">
+            <div class="mb-3"><input type="text" class="form-control" placeholder="Your Name" required></div>
+            <div class="mb-3"><input type="email" class="form-control" placeholder="Your Email Address" required></div>
+            <div class="mb-3"><input type="tel" class="form-control" placeholder="Phone Number (Optional)"></div>
+            <div class="mb-3"><textarea class="form-control" placeholder="Your Project Specifications..." rows="4" required></textarea></div>
+            <button type="submit" class="btn btn-gold w-100 py-2">Send Message</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="col-md-6" data-aos="fade-left">
+        <div class="ps-md-4 h-100 d-flex flex-column justify-content-between">
+          <div>
+            <p class="mb-3"><strong>📞 Phone:</strong> &nbsp;+260 964 180 518</p>
+            <p class="mb-3"><strong>✉ Email:</strong> &nbsp;info@crownmarkstudio.com</p>
+            <p class="mb-4"><strong>📍 Address:</strong> Nglanti Avenue, Lusaka, Zambia</p>
+          </div>
+          <div class="map-container flex-grow-1">
+            <iframe width="100%" height="280" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.openstreetmap.org/export/embed.html?bbox=28.24%2C-15.45%2C28.35%2C-15.38&amp;layer=mapnik" style="border:0; min-height: 250px;"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a class="whatsapp" href="https://wa.me/260964180518?text=Hello,%20I'm%20interested%20in%20your%20services.%20Could%20you%20please%20share%20more%20information%20about%20your%20packages,%20pricing,%20and%20how%20we%20can%20work%20together?" target="_blank" rel="noopener noreferrer">
+  <i class="bi bi-whatsapp"></i>
+</a>
+
+<footer>
+  <div class="container text-center">
+    <p class="mb-0">Copyright &copy; 2026 Crownmark Studio. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  // Initialize Animate On Scroll Engine
+  AOS.init({
+    duration: 600, 
+    easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
+    once: true
+  });
+
+  // Structural Slideshow About Grid Assembly Setup
+  const aboutSwiper = new Swiper('.aboutSwiper', {
+    loop: true,
+    speed: 600,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+
+  // Base configurations for flawless, infinite marquee tickers
+  const baseLinearConfig = {
+    loop: true,
+    grabCursor: true,
+    speed: 8000, 
+    allowTouchMove: true,
+    slidesPerView: 'auto',
+    spaceBetween: 24,
+    breakpoints: {
+      0: { slidesPerView: 1.2 },
+      576: { slidesPerView: 2 },
+      768: { slidesPerView: 3 },
+      1200: { slidesPerView: 4 }
+    }
+  };
+
+  // Portfolio Swiper Continuous Scrolling Top (Scrolls Right)
+  const swiperTop = new Swiper('.portfolioSwiperTop', {
+    ...baseLinearConfig,
+    autoplay: {
+      delay: 0,
+      disableOnInteraction: false,
+      reverseDirection: true
+    }
+  });
+
+  // Portfolio Swiper Continuous Scrolling Bottom (Scrolls Left)
+  const swiperBottom = new Swiper('.portfolioSwiperBottom', {
+    ...baseLinearConfig,
+    autoplay: {
+      delay: 0,
+      disableOnInteraction: false,
+      reverseDirection: false
+    }
+  });
+
+  // Handle continuous hover pauses to prevent marquee resetting/stutter bugs
+  const stopMarqueeOnHover = (swiperInstance, selector) => {
+    const el = document.querySelector(selector);
+    if(el) {
+      el.addEventListener('mouseenter', () => swiperInstance.autoplay.stop());
+      el.addEventListener('mouseleave', () => {
+        swiperInstance.autoplay.start();
+        // Force the continuous timing function back onto the wrapper element immediately
+        swiperInstance.wrapperEl.style.transitionTimingFunction = 'linear';
+      });
+    }
+  };
+
+  stopMarqueeOnHover(swiperTop, '.portfolioSwiperTop');
+  stopMarqueeOnHover(swiperBottom, '.portfolioSwiperBottom');
+</script>
+
+</body>
+</html>
